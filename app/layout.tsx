@@ -31,8 +31,29 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     siteName: site.shortName,
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/images/waterfall.webp`,
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — Waterfall View`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.name,
+    description: site.description,
+    images: [
+      `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/images/waterfall.webp`,
+    ],
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/images/waterfall.webp",
+  },
 };
 
 export default function RootLayout({

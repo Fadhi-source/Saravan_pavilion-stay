@@ -1,4 +1,11 @@
+# Robots.txt for Saravana Pavilion Stay
 User-agent: *
 Allow: /
 
-Sitemap: https://saravanapavilionstay.example.com/sitemap.xml
+# Sitemap
+Sitemap: https://saravanapavilionstay.com/sitemap.xml
+
+# Disallow admin/private paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
