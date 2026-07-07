@@ -3,6 +3,7 @@ import { Fraunces, Inter } from "next/font/google";
 import { site } from "@/lib/site";
 import { Navbar } from "@/components/nav/Navbar";
 import { Footer } from "@/components/nav/Footer";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -42,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
       <head>
+        <link rel="preload" href="/images/waterfall.webp" as="image" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -80,6 +82,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );

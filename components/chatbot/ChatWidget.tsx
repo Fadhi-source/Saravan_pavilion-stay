@@ -59,7 +59,7 @@ export function ChatWidget() {
   }, []);
 
   const handleSend = useCallback(
-    (text: string) => {
+    async (text: string) => {
       const trimmed = text.trim();
       if (!trimmed) return;
 
@@ -67,21 +67,48 @@ export function ChatWidget() {
       setInput("");
       setTyping(true);
 
-      setTimeout(() => {
-        const { intent } = matchIntent(trimmed);
-        let response = intent.response;
+      const history = messages
+        .filter((m) => m.role !== "bot" || m.text.length < 200)
+        .slice(-6)
+        .map((m) => ({ role: m.role, content: m.text }));
 
-        // Append WhatsApp hint for fallback
+      const { intent, confidence } = matchIntent(trimmed);
+
+      // If confident match, use rule-based (fast, no API call)
+      if (confidence >= 0.4 && intent.id !== "fallback") {
+        await new Promise((r) => setTimeout(r, 400 + Math.random() * 300));
+        addMessage({ role: "bot", text: intent.response });
+        setTyping(false);
+        return;
+      }
+
+      // Low confidence — try AI escalation via /api/chat
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: trimmed, history }),
+        });
+        const data = await res.json();
+
+        if (data.fallback || !data.reply) throw new Error("fallback");
+
+        await new Promise((r) => setTimeout(r, 600));
+        addMessage({ role: "bot", text: data.reply });
+        setTyping(false);
+      } catch {
+        // AI unavailable — show rule-based fallback with WhatsApp handoff
+        await new Promise((r) => setTimeout(r, 500));
+        let response = intent.response;
         if (intent.id === "fallback") {
           const waLink = chatWhatsAppLink(`Question: "${trimmed}"`);
-          response += `\n\n<a href="${waLink}" target="_blank" class="inline-flex items-center gap-1 rounded-full bg-moss px-3 py-1 text-xs font-medium text-white hover:bg-moss-dark transition-colors">Message on WhatsApp</a>`;
+          response += `<br/><br/><a href="${waLink}" target="_blank" class="inline-flex items-center gap-1 rounded-full bg-moss px-3 py-1 text-xs font-medium text-white hover:bg-moss-dark transition-colors">Message on WhatsApp</a>`;
         }
-
         addMessage({ role: "bot", text: response });
         setTyping(false);
-      }, 600 + Math.random() * 400);
+      }
     },
-    [addMessage]
+    [addMessage, messages]
   );
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

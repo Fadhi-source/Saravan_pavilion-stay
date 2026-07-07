@@ -32,6 +32,7 @@ export function BookingWidget() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
@@ -108,6 +109,7 @@ export function BookingWidget() {
             onClick={() => {
               setSubmitted(false);
               setBooking(initialBookingState);
+              reset();
             }}
             className="mt-4 text-sm text-ink/50 underline underline-offset-2 hover:text-ink/80"
           >
