@@ -78,47 +78,47 @@ export function Gallery() {
         >
           <button
             onClick={close}
-            className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white backdrop-blur transition-colors hover:bg-white/20"
+            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
             aria-label="Close lightbox"
           >
-            <X size={24} />
+            <X size={22} />
           </button>
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              prev();
-            }}
-            className="absolute left-4 z-10 rounded-full bg-white/10 p-2 text-white backdrop-blur transition-colors hover:bg-white/20"
-            aria-label="Previous image"
-          >
-            <ChevronLeft size={28} />
-          </button>
+          <div className="relative flex w-full max-w-[95vw] items-center justify-center md:max-w-[85vw]">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
+              className="absolute left-2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20 md:left-4"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={24} />
+            </button>
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              next();
-            }}
-            className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white backdrop-blur transition-colors hover:bg-white/20 max-md:top-auto max-md:bottom-4 max-md:right-16"
-            aria-label="Next image"
-          >
-            <ChevronRight size={28} />
-          </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
+              className="absolute right-2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20 md:right-4"
+              aria-label="Next image"
+            >
+              <ChevronRight size={24} />
+            </button>
 
-          <div
-            className="max-h-[85vh] max-w-[90vw] rounded-2xl bg-contain bg-center bg-no-repeat shadow-2xl"
-            style={{
-              width: "auto",
-              height: "auto",
-              aspectRatio: "auto",
-              backgroundImage: `url(${galleryItems[activeIndex].src})`,
-              backgroundSize: "contain",
-              minWidth: "60vw",
-              minHeight: "50vh",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          />
+            <div
+              className="h-[60vh] w-full rounded-2xl bg-contain bg-center bg-no-repeat shadow-2xl md:h-[80vh]"
+              style={{
+                backgroundImage: `url(${galleryItems[activeIndex].src})`,
+              }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+
+          <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-full bg-white/10 px-3 py-1.5 text-xs text-white backdrop-blur">
+            {activeIndex + 1} / {galleryItems.length}
+          </div>
         </div>
       )}
     </section>

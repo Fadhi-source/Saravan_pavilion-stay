@@ -1,27 +1,33 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { site, images } from "@/lib/site";
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const y = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "10%"] : ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.3]);
 
   return (
     <section
       ref={ref}
-      className="relative flex h-dvh min-h-[600px] items-center justify-center overflow-hidden"
+      className="relative flex h-dvh min-h-[500px] items-center justify-center overflow-hidden md:min-h-[600px]"
     >
       <motion.div
-        style={{ y, opacity }}
+        style={{ y, opacity, willChange: "transform, opacity" }}
         className="absolute inset-0"
       >
         <div

@@ -170,10 +170,10 @@ export function BookingWidget() {
                       }))
                     }
                     disabled={booking[type] <= 0}
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-ink/15 text-ink transition-colors hover:border-forest-600 hover:text-forest-600 disabled:opacity-30"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-ink transition-colors hover:border-forest-600 hover:text-forest-600 disabled:opacity-30"
                     aria-label={`Decrease ${type}`}
                   >
-                    <Minus size={14} />
+                    <Minus size={16} />
                   </button>
                   <span className="min-w-[2ch] text-center font-medium tabular-nums">
                     {booking[type]}
@@ -186,10 +186,10 @@ export function BookingWidget() {
                         [type]: b[type] + 1,
                       }))
                     }
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-ink/15 text-ink transition-colors hover:border-forest-600 hover:text-forest-600"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-ink transition-colors hover:border-forest-600 hover:text-forest-600"
                     aria-label={`Increase ${type}`}
                   >
-                    <Plus size={14} />
+                    <Plus size={16} />
                   </button>
                 </div>
               </div>
@@ -211,7 +211,7 @@ export function BookingWidget() {
                   setBooking((b) => ({ ...b, roomId: room.id }))
                 }
                 className={cn(
-                  "rounded-xl border-2 px-4 py-3 text-left text-sm transition-all",
+                  "rounded-xl border-2 px-4 py-3.5 text-left text-sm transition-all",
                   booking.roomId === room.id
                     ? "border-forest-600 bg-forest-50 text-forest-900"
                     : "border-ink/10 bg-white text-ink/70 hover:border-ink/20"
@@ -240,7 +240,7 @@ export function BookingWidget() {
               id="name"
               {...register("name")}
               className={cn(
-                "w-full rounded-xl border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-100",
+                "w-full rounded-xl border bg-white px-4 py-3 text-base outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-100 md:text-sm",
                 errors.name ? "border-red-400" : "border-ink/10"
               )}
               placeholder="Your full name"
@@ -257,7 +257,7 @@ export function BookingWidget() {
               id="phone"
               {...register("phone")}
               className={cn(
-                "w-full rounded-xl border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-100",
+                "w-full rounded-xl border bg-white px-4 py-3 text-base outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-100 md:text-sm",
                 errors.phone ? "border-red-400" : "border-ink/10"
               )}
               placeholder="+91 98765 43210"
@@ -274,7 +274,7 @@ export function BookingWidget() {
               id="email"
               {...register("email")}
               className={cn(
-                "w-full rounded-xl border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-100",
+                "w-full rounded-xl border bg-white px-4 py-3 text-base outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-100 md:text-sm",
                 errors.email ? "border-red-400" : "border-ink/10"
               )}
               placeholder="you@example.com"
@@ -294,7 +294,7 @@ export function BookingWidget() {
               id="specialRequests"
               rows={3}
               {...register("specialRequests")}
-              className="w-full rounded-xl border border-ink/10 bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-100"
+              className="w-full rounded-xl border border-ink/10 bg-white px-4 py-3 text-base outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-100 md:text-sm"
               placeholder="Allergies, celebration, early check-in..."
             />
           </div>

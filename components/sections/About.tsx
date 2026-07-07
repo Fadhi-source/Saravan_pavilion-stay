@@ -12,7 +12,7 @@ export function About() {
       <div className="container-narrow">
         <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
           {/* Image collage */}
-          <Reveal className="relative">
+          <div className="relative overflow-visible">
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
               <div
                 className="h-full w-full bg-cover bg-center"
@@ -20,13 +20,15 @@ export function About() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
-            <div className="absolute -bottom-6 -right-6 aspect-[3/2] w-2/3 overflow-hidden rounded-2xl shadow-xl">
-              <div
-                className="h-full w-full bg-cover bg-center"
-                style={{ backgroundImage: `url(${images.atmosphire})` }}
-              />
-            </div>
-          </Reveal>
+            <Reveal className="!overflow-visible">
+              <div className="absolute -bottom-4 right-0 aspect-[3/2] w-[55%] overflow-hidden rounded-2xl shadow-xl md:-bottom-6 md:-right-6 md:w-2/3">
+                <div
+                  className="h-full w-full bg-cover bg-center"
+                  style={{ backgroundImage: `url(${images.atmosphire})` }}
+                />
+              </div>
+            </Reveal>
+          </div>
 
           {/* Content */}
           <div>

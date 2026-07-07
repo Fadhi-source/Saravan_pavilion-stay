@@ -180,7 +180,7 @@ export function ChatWidget() {
                 <button
                   key={intent.id}
                   onClick={() => handleSend(intent.patterns[0])}
-                  className="rounded-full border border-ink/10 bg-cream-paper px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-forest-500 hover:text-forest-600"
+                  className="min-h-11 rounded-full border border-ink/10 bg-cream-paper px-4 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-forest-500 hover:text-forest-600"
                 >
                   {intent.patterns[0]}
                 </button>
@@ -197,7 +197,7 @@ export function ChatWidget() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Type your question..."
-              className="flex-1 rounded-xl bg-ink/5 px-4 py-2.5 text-sm outline-none transition-colors focus:bg-ink/[7%]"
+              className="flex-1 rounded-xl bg-ink/5 px-4 py-2.5 text-base outline-none transition-colors focus:bg-ink/[7%] md:text-sm"
             />
             <button
               onClick={() => handleSend(input)}
